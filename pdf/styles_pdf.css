@@ -1,0 +1,50 @@
+#page{font-size: 12px; font-family: helvetica, arial; margin: 50px 50px 50px 50px; width: 100%;}
+
+#header{height: 150px;}
+#header .left{float: left;}
+#header .right{position: relative; left: 480px; top: -100px;}
+
+#corps{}
+#corps .box_entre{font-size:20px; width: 47%; text-align: center;}
+#corps .box_client{position: relative; border: solid 1px; border-radius: 10px 10px 10px 10px; width: 30%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px; left: 56%; top: -40px;}
+.box_num_doss{position: relative; border: solid 0.2px; width: 25%;height:80px; top: 10px; margin-bottom: 10px;}
+#corps .box_ref_doss{position: relative; border: solid 0.2px; width: 25%;height:80px; left: 280px; top: -90px; margin-bottom: 10px;}
+#corps .box_info_main{position: relative; border: solid 0.2px; width: 25%;height:80px; left: 565px; top: -90px; margin-bottom: 10px;}
+
+#corps .box_appareil_header{height: 25px; background-color: #ABA4A4; border: solid 1px; width: 765px; font-weight: bold; text-align: center;}
+#corps .box_appareil_left{
+	border-left: solid 0.2px;
+	border-bottom: solid 0.2px;
+	width: 450px;
+}
+#corps .box_appareil_right{
+	border-right: solid 0.2px;
+	border-bottom: solid 0.2px;
+	width: 315px;
+	position: relative;
+	left: 450px;
+	top: -122px;
+}
+#corps .box_symptome{width: 387px; height:100px;}
+#corps .box_symptome_header{height: 25px; border: solid 1px; background-color: #ABA4A4; font-weight: bold; text-align: center;}
+#corps .box_symptome_corps{height: 100px; border: solid 0.2px; padding-top: 5px; padding-left: 5px;}
+
+#corps .box_devis{width: 370px; height: 100px; position:relative; left:392px; top: -133px;}
+#corps .box_devis_header{height: 25px; border: solid 1px; background-color: #ABA4A4; font-weight: bold; text-align: center;}
+#corps .box_devis_corps{height: 100px; border: solid 0.2px; padding-left: 5px; padding-top: 5px;}
+
+#corps .box_remarques{width: 387px; height:100px;}
+#corps .box_remarques_header{height: 25px; border: solid 1px; background-color: #ABA4A4; font-weight: bold; text-align: center;}
+#corps .box_remarques_corps{height: 100px; border: solid 0.2px; padding-top: 5px; padding-left: 5px;}
+
+#corps .box_acompte{width: 370px; height: 100px; position:relative; left:392px; top: -133px;}
+#corps .box_acompte_header{height: 25px; border: solid 1px; background-color: #ABA4A4; font-weight: bold; text-align: center;}
+#corps .box_acompte_corps{height: 100px; border: solid 0.2px; padding-top: 5px; padding-left: 5px;}
+
+#corps .box_info_complementaire{width:763px; height:100px;}
+#corps .box_info_complementaire_header{height: 25px; border: solid 1px; background-color: #ABA4A4; font-weight: bold; text-align: center;}
+#corps .box_info_complementaire_corps{height: 100px; border: solid 0.2px; padding-top: 5px; padding-left: 5px;}
+
+#corps .box_signature{width: 370px; height: 70px; position:relative; left:390px; top: 0px; border: solid 0.7px; padding-top: 5px; padding-left: 5px;}
+
+/*#corps .responsable{position: relative; left: 450px;}*/
