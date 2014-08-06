@@ -208,7 +208,7 @@ $somme_facture_client = mysql_result($sql_facture_client,0);
 $sql_client = mysql_query("SELECT count(*) FROM client");
 $somme_client = mysql_result($sql_client, 0);
 
-$sql_facture_client_day = mysql_query("SELECT count(*) FROM intervention WHERE date = '" .$date."'");
+$sql_facture_client_day = mysql_query("SELECT count(*) FROM intervention WHERE date_entre = '" .$date."'");
 $somme_facture_client_day = mysql_result($sql_facture_client_day, 0);
 
 ?>
@@ -241,7 +241,7 @@ $somme_facture_client_day = mysql_result($sql_facture_client_day, 0);
 	
 		<div class="tile-stats tile-aqua">
 			<div class="icon"><i class="entypo-mail"></i></div>
-			<div class="num" data-start="0" data-end="<?php echo $somme_facture_client_day; ?>" data-postfix="€" data-duration="1500" data-delay="1200">0</div>
+			<div class="num" data-start="0" data-end="<?php echo $somme_facture_client_day; ?>" data-postfix="" data-duration="1500" data-delay="1200">0</div>
 			
 			<h3>Nombre d'intervention</h3>
 			<p>par jour.</p>
