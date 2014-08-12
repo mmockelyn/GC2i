@@ -30,8 +30,7 @@ $montant_acompte = $_POST['montant_acompte'];
 
 
 
-mysql_connect("localhost", "root", "1992maxime");
-mysql_select_db("inter");
+include ('../../../inc/config.php');
 $error_sql = mysql_error();
 
 $req = "INSERT INTO `intervention`(`idintervention`, `idclient`, `date_entre`, `heure_entre`, `provenance`, `employe`, `categorie_materiel`, `marque_materiel`, `modele_materiel`, `reference_materiel`, `num_serie`, `garantie`, `date_achat`, `lieu_achat`, `num_fact_achat`, `type_garantie`, `retour`, `type_retour`, `symptome`, `remarques`, `info_complementaire`, `etat_intervention`, `devis`, `montant_autorise_devis`, `acompte`, `montant_acompte`, `date_prevue`) 

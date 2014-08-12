@@ -3,8 +3,7 @@
 
 $idintervention = $_GET['idintervention'];
 
-mysql_connect("localhost", "root", "1992maxime");
-mysql_select_db("inter");
+include ('../../../inc/config.php');
 $error_sql = mysql_error();
 
 mysql_query("DELETE FROM intervention WHERE idintervention = $idintervention");

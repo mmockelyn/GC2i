@@ -443,14 +443,15 @@ $donnee_inter = mysql_fetch_array($sql_inter);
 					</div>
 					<div id="profile-3" class="tab-pane">
 						<center>
-							<a href="<?php echo $rootsite; ?>/pdf/bienvenue.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Lettre de Bienvenue<i class="entypo-mail"></i></button></a><br><br>
+							<a href="<?php echo $rootsite; ?>/pdf/bienvenue.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Lettre de Bienvenue<i class="entypo-mail"></i></button></a><br><br>
+							<a href="<?php echo $rootsite; ?>/pdf/justificatif.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Demande de Justificatif<i class="entypo-mail"></i></button></a><br><br>
 						</center>
 					</div>
 					<div id="profile-4" class="tab-pane">
 						<center>
-							<a href="<?php echo $rootsite; ?>/email/bienvenue.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">E mail de Bienvenue<i class="entypo-mail"></i></button></a><br><br>
-							<a href="<?php echo $rootsite; ?>/email/disposition.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Mise à disposition du matériel<i class="entypo-mail"></i></button></a><br><br>
-							<a href="<?php echo $rootsite; ?>/email/justificatif.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Demande de Justificatif<i class="entypo-mail"></i></button></a><br><br>
+							<a href="<?php echo $rootsite; ?>/email/bienvenue.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">E mail de Bienvenue<i class="entypo-mail"></i></button></a><br><br>
+							<a href="<?php echo $rootsite; ?>/email/disposition.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Mise à disposition du matériel<i class="entypo-mail"></i></button></a><br><br>
+							<a href="<?php echo $rootsite; ?>/email/justificatif.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Demande de Justificatif<i class="entypo-mail"></i></button></a><br><br>
 						</center>
 					</div>
 				</div>

@@ -10,7 +10,7 @@
 					</button>
 				</form>
 			</li>
-			<li class="active opened active">
+			<li>
 				<a href="<?php echo $rootsite; ?>index.php">
 					<i class="entypo-gauge"></i>
 					<span>Accueil</span>
@@ -47,5 +47,16 @@
 						</a>
 					</li>
 				</ul>
+			</li>
+			<li>
+				<a href="<?php echo $rootsite; ?>/core/main/support">
+					<i class="entypo-phone"></i>
+					<span>Support client</span>
+					<?php
+						$sql_support_row = mysql_query("SELECT count('somme') FROM support_client WHERE etat_support <= 1");
+						$result = mysql_fetch_row($sql_support_row);
+					?>
+					<span class="badge badge-secondary"><?php echo $result[0]; ?></span>
+				</a>
 			</li>
 		</ul>

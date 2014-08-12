@@ -25,8 +25,7 @@ $info_complementaire_bdl = $_POST['info_complementaire_bdl'];
 
 
 
-mysql_connect("localhost", "root", "1992maxime");
-mysql_select_db("inter");
+include ('../../../inc/config.php');
 $error_sql = mysql_error();
 
 $req = "INSERT INTO `facture_intervention`(`idfactureintervention`, `idintervention`, `idclient`, `article1`, `article2`, `article3`, `article4`, `article5`, `qte1`, `qte2`, `qte3`, `qte4`, `qte5`, `pvht1`, `pvht2`, `pvht3`, `pvht4`, `pvht5`, `remise`, `mode_paiement`) 

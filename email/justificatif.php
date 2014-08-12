@@ -1,8 +1,9 @@
 <?php
 include ('../inc/config.php');
-$idintervention = $_GET['idintervention'];
-$sql_inter = mysql_query("SELECT * FROM intervention, client WHERE intervention.idclient = client.idclient AND idintervention = $idintervention");
-$donnee_inter = mysql_fetch_array($sql_inter); 
+$idclient = $_GET['idclient'];
+$sql_inter = mysql_query("SELECT * FROM intervention, client WHERE intervention.idclient = client.idclient AND idclient = $idclient");
+$donnee_inter = mysql_fetch_array($sql_inter);
+$idintervention = $donnee_inter['idintervention']; 
 $nom = $donnee_inter['nom'];
 $categorie = $donnee_inter['categorie_materiel'];
 $modele = $donnee_inter['modele_materiel'];

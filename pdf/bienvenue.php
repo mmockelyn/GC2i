@@ -1,7 +1,7 @@
 <?php
 include ('../inc/config.php');
-$idintervention = $_GET['idintervention'];
-$sql_inter = mysql_query("SELECT * FROM intervention, client WHERE intervention.idclient = client.idclient AND idintervention = $idintervention");
+$idclient = $_GET['idclient'];
+$sql_inter = mysql_query("SELECT * FROM client WHERE idclient = $idclient");
 $donnee_inter = mysql_fetch_array($sql_inter); 
 ?>
 <?php

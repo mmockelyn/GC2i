@@ -10,96 +10,59 @@ $date = date('d/m/Y');
 <?php include ('../../../inc/headerbar.php'); ?>
 
 <hr />
-			<ol class="breadcrumb bc-3">
-						<li>
-				<a href="index.html"><i class="entypo-home"></i>Accueil</a>
-			</li>
-				<li class="active">
-			
-							<strong>Client</strong>
-					</li>
-					</ol>
+	<ol class="breadcrumb bc-3">
+		<li><a href="index.html"><i class="entypo-home"></i>Accueil</a></li>
+		<li class="active"><strong>Support Client</strong></li>
+	</ol>
 			
 
 
 
-<h3>Liste des Clients</h3>
-				<a href="nouv.client.php">
-					<button class="btn btn-green btn-icon icon-left" type="button">
-						Nouveau Client
-						<i class="entypo-plus"></i>
-					</button>
-				</a>
+<h3>Liste des Message Client</h3>
+				
 					<br />
 <table class="table table-bordered datatable" id="table-1">
 
 	<thead>
 		<tr>
 			<th>ID</th>
-			<th>Identité</th>
-			<th>Adresse</th>
-			<th>Contact</th>
-			<th>Info (si société)</th>
-			<th>Actions</th>
+			<th>Nom & Email</th>
+			<th>Type de Message</th>
+			<th>Action</th>
 		</tr>
 	</thead>
-	
 	<tbody>
 		<?php
-			$query_client = mysql_query("SELECT * FROM client");
-			while($donnee_client = mysql_fetch_array($query_client))
+			$sql_support = mysql_query("SELECT * FROM support_client");
+			while($donnee_support = mysql_fetch_array($sql_support))
 				{
-		?>
+		?>	
 		<tr>
-			<td><?php echo $donnee_client['idclient']; ?></td>
+			<td>SUP000<?php echo $donnee_support['idsupport']; ?></td>
 			<td>
-				<?php 
-					if($donnee_client['civilite'] == 1){echo "M.";}
-					if($donnee_client['civilite'] == 2){echo "Mme.";}
-					if($donnee_client['civilite'] == 3){echo "Mlle.";}
-				?>
-
-			 <?php echo $donnee_client['nom']; ?> <?php echo $donnee_client['prenom']; ?></td>
-			<td>
-				<?php echo $donnee_client['adresse1']; ?><br>
-				<?php echo $donnee_client['adresse2']; ?><br>
-				<?php echo $donnee_client['cp']; ?> <?php echo $donnee_client['ville']; ?>
+				<b>Nom:</b><?php echo $donnee_support['nom']; ?><br>
+				<b>Email:</b><?php echo $donnee_support['email']; ?>
 			</td>
 			<td>
-				Tel: <?php echo $donnee_client['tel']; ?><br>
-				Port: <?php echo $donnee_client['port']; ?><br>
-				Mail: <?php echo $donnee_client['mail']; ?>
+				<?php echo $donnee_support['type_bug']; ?>
 			</td>
 			<td>
-				Raison Social: <?php echo $donnee_client['raison_social']; ?><br>
-				Siret: <?php echo $donnee_client['siret']; ?><br>
-				TVA Intracommunautaire: <?php echo $donnee_client['tva_intra']; ?>
-			</td>
-			<td>
-				<a href="modif.client.php?idclient=<?php echo $donnee_client['idclient']; ?>" class="btn btn-default btn-sm btn-icon icon-left">
-					<i class="entypo-pencil"></i>
-					Editer
-				</a>
-				
-				<a href="supp.client.php?idclient=<?php echo $donnee_client['idclient']; ?>" class="btn btn-danger btn-sm btn-icon icon-left">
-					<i class="entypo-cancel"></i>
-					Supprimé
-				</a>
-				
-				<a href="fiche.client.php?idclient=<?php echo $donnee_client['idclient']; ?>" class="btn btn-info btn-sm btn-icon icon-left">
+				<a href="<?php echo $rootsite; ?>/core/main/support/fiche.bug.php?idsupport=<?php echo $donnee_support['idsupport']; ?>" class="btn btn-info btn-sm btn-icon icon-left">
 					<i class="entypo-info"></i>
-					Fiche Client
+					Fiche Message Client
 				</a>
-				<a href="<?php echo $rootsite; ?>/core/main/inter/">
-					<button class="btn btn-black" type="button">
-							<i class="entypo-tools"></i> 
-					</button>
+				<?php
+					if($donnee_support['etat_support'] >= 4){echo "";}
+					else{
+				?>
+				<a href="<?php echo $rootsite; ?>/core/main/support/clore.bug.php?idsupport=<?php echo $donnee_support['idsupport']; ?>" class="btn btn-green btn-sm btn-icon icon-left">
+					<i class="entypo-check"></i>
+					Clore Bug Tracker
 				</a>
+				<?php } ?>
 			</td>
 		</tr>
 		<?php } ?>
-		
-		
 	</tbody>
 </table>
 <script type="text/javascript">
@@ -170,7 +133,7 @@ var tableContainer;
 		
 		tableContainer.dataTable({
 			"sPaginationType": "bootstrap",
-			"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+			"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 			"bStateSave": true,
 			
 

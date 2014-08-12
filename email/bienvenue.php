@@ -1,11 +1,11 @@
 <?php
 include ('../inc/config.php');
-$idintervention = $_GET['idintervention'];
-$sql_inter = mysql_query("SELECT * FROM intervention, client WHERE intervention.idclient = client.idclient AND idintervention = $idintervention");
-$donnee_inter = mysql_fetch_array($sql_inter); 
-$nom = $donnee_inter['nom'];
+$idclient = $_GET['idclient'];
+$sql_client = mysql_query("SELECT * FROM client WHERE idclient = $idclient");
+$donnee_client = mysql_fetch_array($sql_client);
+$nom = $donnee_client['nom'];
 
-$mail = $donnee_inter['mail']; // Déclaration de l'adresse de destination.
+$mail = $donnee_client['mail']; // Déclaration de l'adresse de destination.
 if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
 {
     $passage_ligne = "\r\n";

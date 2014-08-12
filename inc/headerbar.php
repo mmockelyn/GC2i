@@ -8,7 +8,7 @@
 			<!-- Profile Info -->
 			<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<img src="assets/images/avatar/<?php echo $donnees_login['images']; ?>.jpg" alt="" class="img-circle" />
+					<img src="<?php echo $rootsite; ?>assets/images/avatar/<?php echo $donnees_login['images']; ?>.jpg" alt="" class="img-circle" />
 					<?php echo $donnees_login['nom']; ?> <?php echo $donnees_login['prenom']; ?>
 				</a>
 			</li>
