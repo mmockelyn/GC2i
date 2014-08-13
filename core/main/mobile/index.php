@@ -10,15 +10,10 @@ $date = date('d/m/Y');
 <?php include ('../../../inc/headerbar.php'); ?>
 
 <hr />
-			<ol class="breadcrumb bc-3">
-						<li>
-				<a href="index.html"><i class="entypo-home"></i>Accueil</a>
-			</li>
-				<li class="active">
-			
-							<strong>Mobile</strong>
-					</li>
-					</ol>
+	<ol class="breadcrumb bc-3">
+		<li><a href="index.html"><i class="entypo-home"></i>Accueil</a></li>
+		<li class="active"><strong>Intervention Mobile</strong></li>
+	</ol>
 			
 
 
@@ -26,7 +21,7 @@ $date = date('d/m/Y');
 <h3>Liste des Interventions Mobile</h3>
 				<a href="nouv.inter.php">
 					<button class="btn btn-green btn-icon icon-left" type="button">
-						Nouvelle Intervention
+						Nouvelle Intervention Mobile
 						<i class="entypo-plus"></i>
 					</button>
 				</a>
@@ -52,12 +47,9 @@ $date = date('d/m/Y');
 		<?php 
 				if($donnee_intervention['etat_intervention'] == 1){echo "<div class=blocred>";}
 				if($donnee_intervention['etat_intervention'] == 2){echo "<div class=blocyellow>";}
-				if($donnee_intervention['etat_intervention'] == 3){echo "<div class=blocyellow>";}
+				if($donnee_intervention['etat_intervention'] == 3){echo "<div class=blocgreen>";}
 				if($donnee_intervention['etat_intervention'] == 4){echo "<div class=blocgreen>";}
-				if($donnee_intervention['etat_intervention'] == 5){echo "<div class=blocyellow>";}
-				if($donnee_intervention['etat_intervention'] == 6){echo "<div class=blocyellow>";}
-				if($donnee_intervention['etat_intervention'] == 7){echo "<div class=blocgreen>";}
-				if($donnee_intervention['etat_intervention'] == 8){echo "<div class=blocgreen>";}
+
 			?>
 		<tr>
 			<td><?php echo $donnee_intervention['idinterventionmobile']; ?></td>
@@ -68,55 +60,46 @@ $date = date('d/m/Y');
 				Tel: <?php echo $donnee_intervention['tel']; ?><br>
 				Port: <?php echo $donnee_intervention['port']; ?>
 			</td>
-			<td><?php echo $donnee_intervention['date']; ?></td>
 			<td>
-				Matériel:<?php echo $donnee_intervention['materiel'];?><br>
-				Marque: <?php echo $donnee_intervention['marque']; ?><br>
-				Serie: <?php echo $donnee_intervention['serie']; ?>
+				<?php echo $donnee_intervention['date_entre']; ?> à <?php echo $donnee_intervention['heure_entre']; ?><br>
+				<?php
+					if($donnee_intervention['etat_intervention'] != 4 AND $donnee_intervention['etat_intervention'] != 3)
+					{
+						if($donnee_intervention['date_prevue'] == $date){echo "<div id=DivClignotante style=visibility:visible;><font color=green>Dernier Jour pour terminé l'intervention.</font></div> ";}
+						if($donnee_intervention['date_prevue'] < $date){echo "<div id=DivClignotante style=visibility:visible;><font color=red><i class='fa fa-warning'></i> En Retard.</font></div>";}
+					}
+				?>
+				Date Prévue: <?php echo $donnee_intervention['date_prevue']; ?>
+			</td>
+			<td>
+				Catégorie: <?php echo $donnee_intervention['categorie_telephone']; ?><br>
+				Marque: <?php echo $donnee_intervention['marque_telephone']; ?><br>
+				Serie: <?php echo $donnee_intervention['modele_telephone']; ?><br>
+				IMEI: <?php echo $donnee_intervention['imei']; ?>
 			</td>
 			<?php 
 				if($donnee_intervention['etat_intervention'] == 1){echo "<td class=blocred>";}
 				if($donnee_intervention['etat_intervention'] == 2){echo "<td class=blocyellow>";}
-				if($donnee_intervention['etat_intervention'] == 3){echo "<td class=blocyellow>";}
+				if($donnee_intervention['etat_intervention'] == 3){echo "<td class=blocgreen>";}
 				if($donnee_intervention['etat_intervention'] == 4){echo "<td class=blocgreen>";}
-				if($donnee_intervention['etat_intervention'] == 5){echo "<td class=blocyellow>";}
-				if($donnee_intervention['etat_intervention'] == 6){echo "<td class=blocyellow>";}
-				if($donnee_intervention['etat_intervention'] == 7){echo "<td class=blocgreen>";}
-				if($donnee_intervention['etat_intervention'] == 8){echo "<td class=blocgreen>";}
 			?>
 
 				<?php
 					switch ($donnee_intervention['etat_intervention']) {
 						case '1':
-							echo "<div class=blocred>Pris en charge par un technicien</div>";
+							echo "<div class=blocred>Non Vu</div>";
 							break;
 
 						case '2':
-							echo "<div class=blocyellow>Problème Matériel: Pièce en attente de commande</div>";
+							echo "<div class=blocyellow>En Cours</div>";
 							break;
 
 						case '3':
-							echo "<div class=blocyellow>Probleme Matériel: Problème en cours de traitement</div>";
+							echo "<div class=blocyellow>Terminé - Résolue</div>";
 							break;
 
 						case '4':
-							echo "<div class=blocgreen>Probleme Matériel: Résolue, en attente du client</div>";
-							break;
-
-						case '5':
-							echo "<div class=blocyellow>Probleme Logiciel: en attente de plus d'information</div>";
-							break;
-
-						case '6':
-							echo "<div class=blocyellow>Probleme Logiciel: en cours de Traitement</div>";
-							break;
-
-						case '7':
-							echo "<div class=blocgreen>Probleme Logiciel: Résolue, en attente du Client</div>";
-							break;
-
-						case '8':
-							echo "<div class=blocgreen>Intervention Terminé</div>";
+							echo "<div class=blocgreen>Terminé - Non résolue</div>";
 							break;
 						
 						default:
@@ -126,17 +109,7 @@ $date = date('d/m/Y');
 				?>
 			</td>
 			<td>
-				<a href="modif.inter.php?idintervention=<?php echo $donnee_intervention['idinterventionmobile']; ?>" class="btn btn-default btn-sm btn-icon icon-left">
-					<i class="entypo-pencil"></i>
-					Editer
-				</a>
-				
-				<a href="supp.inter.php?idintervention=<?php echo $donnee_intervention['idinterventionmobile']; ?>" class="btn btn-danger btn-sm btn-icon icon-left">
-					<i class="entypo-cancel"></i>
-					Supprimé
-				</a>
-				
-				<a href="<?php echo $rootsite; ?>/pdf/fiche_mobile.php?idintervention=<?php echo $donnee_intervention['idinterventionmobile']; ?>" class="btn btn-info btn-sm btn-icon icon-left">
+				<a href="<?php echo $rootsite; ?>/core/main/mobile/fiche.inter.php?idinterventionmobile=<?php echo $donnee_intervention['idinterventionmobile']; ?>" class="btn btn-info btn-sm btn-icon icon-left">
 					<i class="entypo-info"></i>
 					Fiche Intervention
 				</a>
@@ -148,6 +121,20 @@ $date = date('d/m/Y');
 		
 	</tbody>
 </table>
+<script type="text/javascript">
+var clignotement = function(){
+   if (document.getElementById('DivClignotante').style.visibility=='visible'){
+      document.getElementById('DivClignotante').style.visibility='hidden';
+   }
+   else{
+   document.getElementById('DivClignotante').style.visibility='visible';
+   }
+};
+
+// mise en place de l appel de la fonction toutes les 0.8 secondes
+// Pour arrêter le clignotement : clearInterval(periode);
+periode = setInterval(clignotement, 800);
+</script> 
 <script type="text/javascript">
 jQuery(window).load(function()
 {
@@ -216,7 +203,7 @@ var tableContainer;
 		
 		tableContainer.dataTable({
 			"sPaginationType": "bootstrap",
-			"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+			"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 			"bStateSave": true,
 			
 

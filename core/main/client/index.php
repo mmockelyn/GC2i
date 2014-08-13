@@ -11,14 +11,9 @@ $date = date('d/m/Y');
 
 <hr />
 			<ol class="breadcrumb bc-3">
-						<li>
-				<a href="index.html"><i class="entypo-home"></i>Accueil</a>
-			</li>
-				<li class="active">
-			
-							<strong>Client</strong>
-					</li>
-					</ol>
+				<li><a href="<?php echo $rootsite; ?>"><i class="entypo-home"></i>Accueil</a></li>
+				<li class="active"><strong>Client</strong></li>
+			</ol>
 			
 
 

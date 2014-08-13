@@ -12,15 +12,9 @@ $heure = date('H:i');
 
 <hr />
 	<ol class="breadcrumb bc-3">
-		<li>
-			<a href="index.html"><i class="entypo-home"></i>Accueil</a>
-		</li>
-		<li>
-			<a href="forms-main.html">intervention</a>
-		</li>
-		<li class="active">
-			<strong>Nouvelle intervention</strong>
-		</li>
+		<li><a href="<?php echo $rootsite; ?>"><i class="entypo-home"></i>Accueil</a></li>
+		<li><a href="<?php echo $rootsite; ?>/core/main/inter/">intervention</a></li>
+		<li class="active"><strong>Nouvelle intervention</strong></li>
 	</ol>
 <br />
 

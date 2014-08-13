@@ -53,7 +53,7 @@ $date = date('d/m/Y');
 		?>
 				<div class="row">
 	
-					<h3>L'ajout de l'intervention pour la date du <?php echo $date_entre; ?> à été ajouté avec succès</h3>
+					<h3><i class="entypo-check"></i>L'ajout de l'intervention pour la date du <?php echo $date_entre; ?> à été ajouté avec succès</h3>
 					<a href="<?php echo $rootsite; ?>/core/main/inter/">
 					<button class="btn btn-blue btn-icon" type="button">
 						Retour à la page d'accueil Intervention
@@ -66,7 +66,7 @@ $date = date('d/m/Y');
 		?>
 					<div class="row">
 	
-						<h3>L'ajout de l'intervention pour la date du <?php echo $date_entre; ?> à Echouer</h3>
+						<h3><i class="entypo-cancel"></i>L'ajout de l'intervention pour la date du <?php echo $date_entre; ?> à Echouer</h3>
 						<a href="<?php echo $rootsite; ?>/core/main/inter/">
 						<button class="btn btn-blue btn-icon" type="button">
 							Retour à la page d'accueil Intervention

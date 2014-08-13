@@ -3,8 +3,8 @@ include ('../../../inc/header.php');
 include ('../../../inc/sidebar.php');
 date_default_timezone_set('EUROPE/PARIS');
 $date = date('d/m/Y');
-$idintervention = $_GET['idintervention'];
-$sql_inter = mysql_query("SELECT * FROM intervention, client WHERE intervention.idclient = client.idclient AND idintervention = $idintervention");
+$idinterventionmobile = $_GET['idinterventionmobile'];
+$sql_inter = mysql_query("SELECT * FROM mobile, client WHERE mobile.idclient = client.idclient AND idinterventionmobile = $idinterventionmobile");
 $donnee_inter = mysql_fetch_array($sql_inter);
 ?>	
 	</div>	
@@ -14,15 +14,15 @@ $donnee_inter = mysql_fetch_array($sql_inter);
 
 <hr />
 			<ol class="breadcrumb bc-3">
-				<li><a href="index.html"><i class="entypo-home"></i>Accueil</a></li>
-				<li><a href="<?php echo $rootsite; ?>/core/main/inter/index.php">Intervention</a></li>
-				<li class="active"><strong>Fiche de l'intervention n°<?php echo $donnee_inter['idintervention']; ?></strong></li>
+				<li><a href="<?php echo $rootsite; ?>"><i class="entypo-home"></i>Accueil</a></li>
+				<li><a href="<?php echo $rootsite; ?>/core/main/mobile/index.php">Intervention</a></li>
+				<li class="active"><strong>Fiche de l'intervention n°<?php echo $donnee_inter['idinterventionmobile']; ?></strong></li>
 			</ol>
 			
 
 
 
-<h3>Intervention n° <?php echo $donnee_inter['idintervention']; ?> - <?php echo $donnee_inter['nom']; ?> <?php echo $donnee_inter['prenom']; ?></h3>
+<h3>Intervention n° <?php echo $donnee_inter['idinterventionmobile']; ?> - <?php echo $donnee_inter['nom']; ?> <?php echo $donnee_inter['prenom']; ?></h3>
 	<div class="row">
 		<div class="col-md-6">
 		
@@ -81,7 +81,7 @@ $donnee_inter = mysql_fetch_array($sql_inter);
 					?>
 					<br>
 					<h3>Date Prévue: <?php echo $donnee_inter['date_prevue']; ?></h3>	
-					</center>			
+					</center>	
 				</div>
 				
 			</div>
@@ -153,11 +153,26 @@ $donnee_inter = mysql_fetch_array($sql_inter);
 				
 				<!-- panel body -->
 				<div class="panel-body">
-					Catégorie:		<?php echo $donnee_inter['categorie_materiel']; ?><br>
-					Marque:			<?php echo $donnee_inter['marque_materiel']; ?><br>		
-					Modèle:			<?php echo $donnee_inter['modele_materiel']; ?><br>
-					Référence:		<?php echo $donnee_inter['reference_materiel']; ?><br>
-					N° de série:	<?php echo $donnee_inter['num_serie']; ?><br>
+					Catégorie:		<?php echo $donnee_inter['categorie_telephone']; ?><br>
+					Marque:			<?php echo $donnee_inter['marque_telephone']; ?><br>		
+					Modèle:			<?php echo $donnee_inter['modele_telephone']; ?><br>
+					Imei:		<?php echo $donnee_inter['imei']; ?><br>
+					<div style="position: relative; top: -70px; left: 300px;">
+						<img src="
+							<?php
+								if($donnee_inter['operateur'] == 1){echo 'orange';}
+								if($donnee_inter['operateur'] == 2){echo 'sfr';}
+								if($donnee_inter['operateur'] == 3){echo 'bouygues-telecom';}
+								if($donnee_inter['operateur'] == 4){echo 'free';}
+								if($donnee_inter['operateur'] == 5){echo 'coriolis';}
+								if($donnee_inter['operateur'] == 6){echo 'breizh-mobile';}
+								if($donnee_inter['operateur'] == 7){echo 'nrj';}
+								if($donnee_inter['operateur'] == 8){echo 'numericable';}
+								if($donnee_inter['operateur'] == 9){echo 'tele2-mobile';}
+								if($donnee_inter['operateur'] == 10){echo 'virgin-mobile';}
+							?>
+						.png" />
+					</div>
 				</div>
 				
 			</div>
@@ -182,50 +197,10 @@ $donnee_inter = mysql_fetch_array($sql_inter);
 				<!-- panel body -->
 				<div class="panel-body">
 				Date Achat: 		<?php echo $donnee_inter['date_achat']; ?><br>
-				Lieu d'Achat: 		<?php echo $donnee_inter['lieu_achat']; ?><br>
-				N° Facture d'achat:	<?php echo $donnee_inter['num_fact_achat']; ?><br>
 				Garantie:
 					<?php 
 						if($donnee_inter['garantie'] == 1){echo "OUI";}
 						if($donnee_inter['garantie'] == 0){echo "NON";}
-					?>
-					<br>
-				Type de garantie:
-					<?php
-						switch($donnee_inter['type_garantie'])
-							{
-								case "1":
-								print("HG - Hors Garantie");
-								break;
-
-								case "2":
-								print("1 an");
-								break;
-
-								case "3":
-								print("2 ans");
-								break;
-
-								case "4":
-								print("3 ans");
-								break;
-
-								case "5":
-								print("5 ans");
-								break;
-
-								case "6":
-								print("10 ans");
-								break;
-
-								case "7":
-								print("A vie");
-								break;
-
-								default:
-								print("Inconnue");
-								break;
-							}
 					?>
 					<br>
 					Retour:
@@ -397,7 +372,7 @@ $donnee_inter = mysql_fetch_array($sql_inter);
 				<div class="panel-body">
 					<div class="scrollable" data-height="150" data-autohide="0">
 					<?php
-						$sql_suivi = mysql_query("SELECT * FROM suivi_intervention WHERE idintervention = $idintervention");
+						$sql_suivi = mysql_query("SELECT * FROM suivi_intervention_mobile WHERE idinterventionmobile = $idinterventionmobile");
 						while($donne_suivi = mysql_fetch_array($sql_suivi))
 							{
 					?>
@@ -436,34 +411,37 @@ $donnee_inter = mysql_fetch_array($sql_inter);
 				<div class="tab-content">
 					<div id="profile-1" class="tab-pane active">
 						<center>
-							<a href="supp.inter.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-red btn-icon btn-lg" type="button">Supprimer l'intervention<i class="entypo-cancel"></i></button></a>
-							<a href="insert_task.inter.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-black btn-icon btn-lg" type="button">Ajouter une tache<i class="fa fa-tasks"></i></button></a>
-							<a href="close.inter.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-green btn-icon btn-lg" type="button">Cloturer l'intervention<i class="entypo-check"></i></button></a>
+							<a href="supp.inter.php?idinterventionmobile=<?php echo $idinterventionmobile; ?>"><button class="btn btn-red btn-icon btn-lg" type="button">Supprimer l'intervention<i class="entypo-cancel"></i></button></a>
+							<a href="insert_task.inter.php?idinterventionmobile=<?php echo $idinterventionmobile; ?>"><button class="btn btn-black btn-icon btn-lg" type="button">Ajouter une tache<i class="fa fa-tasks"></i></button></a>
+							<?php
+								if($donnee_inter['etat_intervention'] < 3)
+								{
+							?>
+							<a href="close.inter.php?idinterventionmobile=<?php echo $idinterventionmobile; ?>"><button class="btn btn-green btn-icon btn-lg" type="button">Cloturer l'intervention<i class="entypo-check"></i></button></a>
+							<?php } else { ?>
+							<button class="btn btn-green btn-icon btn-lg" type="button" disabled="disabled">Déja Cloturer<i class="entypo-check"></i></button>
+							<?php } ?>
+
+
 						</center>
 					</div>
 					
 					<div id="profile-2" class="tab-pane">
 						<center>
-							<a href="<?php echo $rootsite; ?>/pdf/fiche_entre.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Bon d'entrée<i class="entypo-download"></i></button></a><br><br>
-							<a href="<?php echo $rootsite; ?>/pdf/point_detaille.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Point détaillé<i class="entypo-download"></i></button></a><br><br>
-							<?php
-								if($donnee_inter['etat_intervention'] >= 3){
-							?>
-							<a href="print/bon_livraison.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Bon de livraison<i class="entypo-download"></i></button></a><br><br>
-							<a href="print/facture.php?idintervention=<?php echo $idintervention; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Facture<i class="entypo-download"></i></button></a><br><br>
-							<?php } ?>
+							<a href="<?php echo $rootsite; ?>/pdf/fiche_entre_mobile.php?idinterventionmobile=<?php echo $idinterventionmobile; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Bon d'entrée<i class="entypo-download"></i></button></a><br><br>
+							<a href="<?php echo $rootsite; ?>/pdf/point_detaille_mobile.php?idinterventionmobile=<?php echo $idinterventionmobile; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Point détaillé<i class="entypo-download"></i></button></a><br><br>
 					</div>
 					<div id="profile-3" class="tab-pane">
 						<center>
 							<a href="<?php echo $rootsite; ?>/pdf/bienvenue.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Lettre de Bienvenue<i class="entypo-mail"></i></button></a><br><br>
-							<a href="<?php echo $rootsite; ?>/pdf/justificatif.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Demande de Justificatif<i class="entypo-mail"></i></button></a><br><br>
+							<a href="<?php echo $rootsite; ?>/pdf/justificatif_mobile.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Demande de Justificatif<i class="entypo-mail"></i></button></a><br><br>
 						</center>
 					</div>
 					<div id="profile-4" class="tab-pane">
 						<center>
 							<a href="<?php echo $rootsite; ?>/email/bienvenue.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">E mail de Bienvenue<i class="entypo-mail"></i></button></a><br><br>
-							<a href="<?php echo $rootsite; ?>/email/disposition.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Mise à disposition du matériel<i class="entypo-mail"></i></button></a><br><br>
-							<a href="<?php echo $rootsite; ?>/email/justificatif.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Demande de Justificatif<i class="entypo-mail"></i></button></a><br><br>
+							<a href="<?php echo $rootsite; ?>/email/disposition_mobile.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Mise à disposition du matériel<i class="entypo-mail"></i></button></a><br><br>
+							<a href="<?php echo $rootsite; ?>/email/justificatif_mobile.php?idclient=<?php echo $donnee_inter['idclient']; ?>"><button class="btn btn-default btn-icon btn-lg" type="button">Demande de Justificatif<i class="entypo-mail"></i></button></a><br><br>
 						</center>
 					</div>
 				</div>

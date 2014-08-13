@@ -1,29 +1,38 @@
 <?php
 //import donnée post
-$idintervention = $_POST['idintervention'];
-$desc_soluce = $_POST['desc_soluce'];
-$etat_intervention = $_POST['etat_intervention'];
+$idinterventionmobile = $_POST['idinterventionmobile'];
+$desc_task = $_POST['desc_task'];
 $date = $_POST['date'];
+$heure = $_POST['heure'];
 
-mysql_connect("mysql51-66.pro", "lsiinforinter", "1992maxime");
-mysql_select_db("lsiinforinter");
+
+include ('../../../inc/config.php');
 $error_sql = mysql_error();
 
-mysql_query("UPDATE mobile SET desc_soluce = '$desc_soluce', etat_intervention='$etat_intervention', date='$date' WHERE idinterventionmobile=".$idintervention);
+mysql_query("INSERT INTO `tache_intervention_mobile`(`idtache`, `idinterventionmobile`, `date_tache`, `heure_tache`, `description_tache`) VALUES (NULL,'$idinterventionmobile','$date','$heure','$desc_task') ");
+mysql_query("INSERT INTO `suivi_intervention_mobile`(`idsuivi`, `idinterventionmobile`, `date_suivi`, `heure_suivi`, `libelle`) VALUES (NULL,'$idinterventionmobile','$date','$heure','Ajout de la tache: $desc_task')");
+mysql_query("UPDATE mobile SET etat_intervention = '2' WHERE idinterventionmobile=".$idinterventionmobile);
 include ('../../../inc/header.php');
 include ('../../../inc/sidebar.php');
 date_default_timezone_set('EUROPE/PARIS');
 ?>	
+<script type="text/javascript">
+<!--
+function delayer(){
+    window.location = "index.php"
+}
+//-->
+</script>
 	</div>	
-	<div class="main-content">
+	<div class="main-content" onLoad="setTimeout('delayer()', 2000)">
 	<?php include ('../../../inc/headerbar.php'); ?>
-		<h2>Modifier une Intervention</h2>
+		<h2>Ajout d'une Tache</h2>
 		<div class="row">
 	
-			<h3>Modification de l'intervention a été  exécuté avec succès</h3>
-			<a href="<?php echo $rootsite; ?>/core/main/mobile/">
+			<h3><i class="entypo-check"></i>L'ajout de la tache pour l'intervention N° <?php echo $idinterventionmobile; ?> à été inseré avec succès.</h3>
+			<a href="<?php echo $rootsite; ?>/core/main/mobile/fiche.inter.php?idinterventionmobile=<?php echo $idinterventionmobile; ?>">
 			<button class="btn btn-blue btn-icon" type="button">
-				Retour à la page d'accueil Intervention
+				Retour à la fiche d'intervention mobile
 				<i class="entypo-home"></i>
 			</button>
 			</a>

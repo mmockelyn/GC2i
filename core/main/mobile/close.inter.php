@@ -4,7 +4,7 @@ include ('../../../inc/sidebar.php');
 date_default_timezone_set('EUROPE/PARIS');
 $date = date('d/m/Y');
 $heure = date('H:i');
-$idintervention = $_GET['idintervention'];
+$idinterventionmobile = $_GET['idinterventionmobile'];
 ?>		
 	</div>	
 	<div class="main-content">
@@ -14,7 +14,7 @@ $idintervention = $_GET['idintervention'];
 <hr />
 	<ol class="breadcrumb bc-3">
 		<li><a href="<?php echo $rootsite; ?>"><i class="entypo-home"></i>Accueil</a></li>
-		<li><a href="<?php echo $rootsite; ?>/core/main/inter/">intervention</a></li>
+		<li><a href="<?php echo $rootsite; ?>/core/main/mobile/">Intervention Mobile</a></li>
 		<li class="active"><strong>Cloturer intervention</strong></li>
 	</ol>
 <br />
@@ -25,7 +25,7 @@ $idintervention = $_GET['idintervention'];
 	
 
 
-<h4>Cloturer intervention</h4>
+<h4>Cloturer l'intervention Mobile</h4>
 <hr />
 
 
@@ -35,7 +35,7 @@ $idintervention = $_GET['idintervention'];
 		<label class="col-sm-3 control-label" for="field-1">Id Intervention</label>
 									
 		<div class="col-sm-5">
-			<input type="text" value="<?php echo $idintervention; ?>" id="field-1" class="form-control" name="idintervention">
+			<input type="text" value="<?php echo $idinterventionmobile; ?>" id="field-1" class="form-control" name="idinterventionmobile">
 		</div>
 	</div>
 
@@ -44,14 +44,19 @@ $idintervention = $_GET['idintervention'];
 								
 			<div class="col-sm-5">
 				<select class="form-control" name="etat_intervention">
-					<option value="1">Non vu</option>
-					<option value="2">En cours</option>
 					<option value="3">Terminé - Réparer</option>
 					<option value="4">Terminé - Non réparé</option>
 				</select>
 			</div>
 		</div>
 
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="field-ta">Information complementaire</label>
+						
+			<div class="col-sm-5">
+				<textarea placeholder="Information complémentaire uniquement pour le bon de livraison" id="field-ta" class="form-control" name="info_complementaire_bdl"></textarea>
+			</div>
+		</div>
 		<br><br><br>
 		<center>
 			<div class="form-group">

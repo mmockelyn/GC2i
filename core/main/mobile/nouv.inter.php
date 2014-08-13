@@ -2,7 +2,8 @@
 include ('../../../inc/header.php');
 include ('../../../inc/sidebar.php');
 date_default_timezone_set('EUROPE/PARIS');
-$date = date('d/m/Y H:i');
+$date = date('d/m/Y');
+$heure = date('H:i');
 ?>		
 	</div>	
 	<div class="main-content">
@@ -10,19 +11,11 @@ $date = date('d/m/Y H:i');
 <?php include ('../../../inc/headerbar.php'); ?>
 
 <hr />
-			<ol class="breadcrumb bc-3">
-						<li>
-				<a href="index.html"><i class="entypo-home"></i>Accueil</a>
-			</li>
-					<li>
-			
-							<a href="forms-main.html">Intervention Mobile</a>
-					</li>
-				<li class="active">
-			
-							<strong>Nouvelle intervention</strong>
-					</li>
-					</ol>
+	<ol class="breadcrumb bc-3">
+		<li><a href="<?php echo $rootsite; ?>"><i class="entypo-home"></i>Accueil</a></li>
+		<li><a href="<?php echo $rootsite; ?>/core/main/mobile/">Intervention Mobile</a></li>
+		<li class="active"><strong>Nouvelle intervention mobile</strong></li>
+	</ol>
 <br />
 
 
@@ -31,7 +24,7 @@ $date = date('d/m/Y H:i');
 	
 
 
-<h4>Nouvelle intervention</h4>
+<h4>Nouvelle intervention Mobile</h4>
 <hr />
 
 
@@ -109,13 +102,35 @@ $date = date('d/m/Y H:i');
 
 				<div class="col-md-4">
 					<div class="form-group">
-						<label class="col-sm-3 control-label">Date et heure</label>
+						<label class="col-sm-3 control-label">Date</label>
 				
 							<div class="col-sm-5">
-								<input type="text" data-mask="datetime" class="form-control" value="<?php echo $date; ?>" name="date">
+								<input type="text"class="form-control" value="<?php echo $date; ?>" name="date_entre">
 							</div>
 					</div>
 				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Heure</label>
+				
+							<div class="col-sm-5">
+								<input type="text"class="form-control" value="<?php echo $heure; ?>" name="heure_entre">
+							</div>
+					</div>
+				</div>
+				<br>
+			</div>
+			<div class="row">
+				<div class="form-group">
+						<label class="col-sm-3 control-label">Provenance </label>
+						
+						<div class="col-sm-5">
+							<select class="form-control" name="provenance">
+								<option value="1">Atelier</option>
+								<option value="2">Exterieur</option>
+							</select>
+						</div>
+					</div>
 				
 			</div>
 			
@@ -127,55 +142,68 @@ $date = date('d/m/Y H:i');
 			<br>
 			<br>
 			<div class="row">
+				<div class="form-group">
+					<label for="field-1" class="col-sm-3 control-label">Catégorie de Telephone</label>
+						
+					<div class="col-sm-5">
+						<input type="text" class="form-control" id="field-1" placeholder="Catégorie du telephone (GSM ou Smartphone)" name="categorie_telephone" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Le GSM est à touche et Le smartphone est ecran tactile." data-original-title="Information de contexte">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+					<br>
 					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label">Type de Téléphone</label>
+						<label for="field-1" class="col-sm-3 control-label">Marque du téléphone</label>
 						
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="field-1" placeholder="Type de Téléphone" name="materiel">
+							<input type="text" class="form-control" id="field-1" placeholder="Marque du telephone (Apple, Samsung, HTC, etc...)" name="marque_telephone">
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Modèle du Téléphone</label>
+						
+						<div class="col-sm-5">
+							<input type="text" class="form-control" id="field-1" placeholder="Modèle du téléphone (le plus souvent trouvez sous la batterie)" name="modele_telephone">
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">IMEI</label>
+						
+						<div class="col-sm-5">
+							<input type="text" class="form-control" id="field-1" placeholder="N° IMEI du téléphone (faite le *#06# sur le téléphone pour l'afficher)" name="imei">
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Opérateur:</label>
+						
+						<div class="col-sm-5">
+							
+							<select name="operateur" class="selectboxit">
+								<option value="1" data-iconurl="icon/orange-icon.png">Orange</option>
+								<option value="2" data-iconurl="icon/sfr-icon.png">SFR</option>
+								<option value="3" data-iconurl="icon/bouygues-icon.png">Bouygues Télécom</option>
+								<option value="4" data-iconurl="icon/free-icon.png">Free Mobile</option>
+								<option value="5" data-iconurl="icon/coriolis-icon.png">Coriolis</option>
+								<option value="6" data-iconurl="icon/breizh-icon.png">Breizh Mobile</option>
+								<option value="7" data-iconurl="icon/nrj-icon.png">NRJ Mobile</option>
+								<option value="8" data-iconurl="icon/numericable-icon.png">Numéricable</option>
+								<option value="9" data-iconurl="icon/tele2-icon.png">Tele2 Mobile</option>
+								<option value="10" data-iconurl="icon/virgin-icon.png">Virgin Mobile</option>
+							</select>
+							
 						</div>
 					</div>
 			</div>
 			<div class="row">
 					<br>
 					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label">Marque</label>
+						<label for="field-ta" class="col-sm-3 control-label">Information</label>
 						
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="field-1" placeholder="Marque du Téléphone" name="marque">
-						</div>
-					</div>
-					<br>
-					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label">Série</label>
-						
-						<div class="col-sm-5">
-							<input type="text" class="form-control" id="field-1" placeholder="Serie de la Marque" name="serie">
-						</div>
-					</div>
-					<br>
-					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label">Numéro de Série</label>
-						
-						<div class="col-sm-5">
-							<input type="text" class="form-control" id="field-1" placeholder="N° de Série du Matériel en Maintenance" name="num_serie">
-						</div>
-					</div>
-					<br>
-					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label">Numéro IMEI</label>
-						
-						<div class="col-sm-5">
-							<input type="text" class="form-control" id="field-1" placeholder="N° IMEI du Matériel en Maintenance" name="num_imei">
-						</div>
-					</div>
-			</div>
-			<div class="row">
-					<br>
-					<div class="form-group">
-						<label for="field-ta" class="col-sm-3 control-label">Accessoire</label>
-						
-						<div class="col-sm-5">
-							<textarea class="form-control" id="field-ta" placeholder="Liste des Accessoires et Logiciel fournis avec le Matériel" name="accessoire"></textarea>
+							<textarea class="form-control" id="field-ta" placeholder="Liste des Accessoires et Logiciel fournis avec le Matériel" name="info_complementaire"></textarea>
 						</div>
 					</div>
 			</div>
@@ -201,6 +229,30 @@ $date = date('d/m/Y H:i');
 							<input type="text" data-mask="date" class="form-control" name="date_achat">
 						</div>
 					</div>
+					<br>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Retour</label>
+						
+					<div class="col-sm-5">
+						<select class="form-control" name="retour">
+							<option value="0">NON</option>
+							<option value="1">OUI</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Type de Retour</label>
+						
+					<div class="col-sm-5">
+						<select class="form-control" name="type_retour">
+							<option value="0">Retour constructeur</option>
+							<option value="1">Retour Magasin</option>
+						</select>
+					</div>
+				</div>
 			</div>
 			
 		</div>
@@ -211,7 +263,7 @@ $date = date('d/m/Y H:i');
 					<label class="col-sm-3 control-label" for="field-ta">Description du Problème</label>
 							
 					<div class="col-sm-9">
-						<textarea placeholder="Description du Problème" id="field-ta" class="form-control" name="desc_probleme"></textarea>
+						<textarea placeholder="Description du Problème" id="field-ta" class="form-control" name="symptome"></textarea>
 					</div>
 				</div>
 			</div>
@@ -222,59 +274,44 @@ $date = date('d/m/Y H:i');
 						<label class="col-sm-3 control-label">Date de Maintenance Prévue</label>
 						
 						<div class="col-sm-5">
-							<input type="text" data-mask="date" class="form-control" name="date_maintenance_prevu">
+							<input type="text" data-mask="date" class="form-control" name="date_prevue">
 						</div>
 					</div>
-			</div>
-			<br>
-			<div class="row">
-					<br>
+					<br>				
 					<div class="form-group">
-						<label class="col-sm-3 control-label">Le Téléphone demarre t-il ?</label>
+						<label class="col-sm-3 control-label">Demande de devis</label>
+							
 						<div class="col-sm-5">
-							<select class="form-control" name="tel_demarre">
-								<option value="0">Non</option>
-								<option value="1">Oui</option>
+							<select class="form-control" name="devis">
+								<option value="0">NON</option>
+								<option value="1">OUI</option>
 							</select>
 						</div>
 					</div>
-					<br>
 					<div class="form-group">
-						<label class="col-sm-3 control-label">Code de Déverrouillage:</label>
+						<label class="col-sm-3 control-label">Montant autorisé</label>
 						
 						<div class="col-sm-5">
-							<input type="text" id="field-1" class="form-control" name="code_util">
+							<input type="text" class="form-control" name="montant_autorise_devis">
 						</div>
 					</div>
-					<br>
 					<div class="form-group">
-						<label class="col-sm-3 control-label">Opérateur Téléphonique</label>
+						<label class="col-sm-3 control-label">Versement d'acompte</label>
+							
+						<div class="col-sm-5">
+							<select class="form-control" name="acompte">
+								<option value="0">NON</option>
+								<option value="1">OUI</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Montant Perçu</label>
 						
 						<div class="col-sm-5">
-							<input type="text" id="field-1" class="form-control" name="operateur">
+							<input type="text" class="form-control" name="montant_acompte">
 						</div>
 					</div>
-					<br>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">Le client a-t-il fait une sauvegarde de donnée ?</label>
-						<div class="col-sm-5">
-							<select class="form-control" name="sauvegarde">
-								<option value="0">Non</option>
-								<option value="1">Oui</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">Accepte t-il une restauration eventuel ?</label>
-						<div class="col-sm-5">
-							<select class="form-control" name="restauration">
-								<option value="0">Non</option>
-								<option value="1">Oui</option>
-							</select>
-						</div>
-					</div>
-
 			</div>
 			<br>
 			<div class="row">

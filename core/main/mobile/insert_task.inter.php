@@ -4,7 +4,6 @@ include ('../../../inc/sidebar.php');
 date_default_timezone_set('EUROPE/PARIS');
 $date = date('d/m/Y');
 $heure = date('H:i');
-$idintervention = $_GET['idintervention'];
 ?>		
 	</div>	
 	<div class="main-content">
@@ -12,54 +11,72 @@ $idintervention = $_GET['idintervention'];
 <?php include ('../../../inc/headerbar.php'); ?>
 
 <hr />
-	<ol class="breadcrumb bc-3">
-		<li><a href="<?php echo $rootsite; ?>"><i class="entypo-home"></i>Accueil</a></li>
-		<li><a href="<?php echo $rootsite; ?>/core/main/inter/">intervention</a></li>
-		<li class="active"><strong>Cloturer intervention</strong></li>
-	</ol>
+			<ol class="breadcrumb bc-3">
+				<li><a href="index.html"><i class="entypo-home"></i>Accueil</a></li>
+				<li><a href="forms-main.html">Intervention Mobile</a></li>
+				<li class="active"><strong>Inserer une tache</strong></li>
+			</ol>
 <br />
 
 
 <br />
 <br />
-	
+<?php
+$idinterventionmobile = $_GET['idinterventionmobile'];
+
+$sql_inter = mysql_query("SELECT * FROM mobile WHERE idinterventionmobile =" .$idinterventionmobile);
+$donnee_inter = mysql_fetch_array($sql_inter);
+?>
 
 
-<h4>Cloturer intervention</h4>
+<h4>Insertion d'une tache</h4>
 <hr />
 
+				<form role="form" class="form-horizontal form-groups-bordered" method="post" action="valid.modif.inter.php">
 
-<form role="form" class="form-horizontal form-groups-bordered" method="post" action="valid.close.inter.php">
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">ID Intervention</label>
+						
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="field-1" placeholder="Id Intervention" name="idinterventionmobile" value="<?php echo $donnee_inter['idinterventionmobile']; ?>">
+						</div>
+					</div>
 
-	<div class="form-group">
-		<label class="col-sm-3 control-label" for="field-1">Id Intervention</label>
-									
-		<div class="col-sm-5">
-			<input type="text" value="<?php echo $idintervention; ?>" id="field-1" class="form-control" name="idintervention">
-		</div>
-	</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="field-ta">Description de la Tache</label>
+						
+						<div class="col-sm-5">
+							<textarea placeholder="Description de la tache" id="field-ta" class="form-control" name="desc_task"></textarea>
+						</div>
+					</div>
 
-		<div class="form-group">
-			<label class="col-sm-3 control-label">Etat de l'intervention</label>
-								
-			<div class="col-sm-5">
-				<select class="form-control" name="etat_intervention">
-					<option value="1">Non vu</option>
-					<option value="2">En cours</option>
-					<option value="3">Terminé - Réparer</option>
-					<option value="4">Terminé - Non réparé</option>
-				</select>
-			</div>
-		</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Date</label>
+				
+							<div class="col-sm-5">
+								<input type="text" class="form-control" value="<?php echo $date; ?>" name="date">
+							</div>
+					</div>
 
-		<br><br><br>
-		<center>
-			<div class="form-group">
-				<button class="btn btn-green" type="submit">Valider</button>
-			</div>
-		</center>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Heure</label>
+				
+							<div class="col-sm-5">
+								<input type="text" class="form-control" value="<?php echo $heure; ?>" name="heure">
+							</div>
+					</div>
 
-</form>
+					<div class="form-group">
+
+						<div class="col-sm-offset-3 col-sm-5">
+							<button type="submit" class="btn btn-green">Valider</button>
+							<button type="reset" class="btn btn-red">Reset</button>
+						</div>
+					</div>
+
+				</form>
+
+
 <footer class="main">
 	
 		
@@ -193,32 +210,16 @@ $idintervention = $_GET['idintervention'];
 	<script src="<?php echo $rootsite; ?>assets/js/joinable.js"></script>
 	<script src="<?php echo $rootsite; ?>assets/js/resizeable.js"></script>
 	<script src="<?php echo $rootsite; ?>assets/js/neon-api.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/select2/select2.min.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/bootstrap-tagsinput.min.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/typeahead.min.js"></script>
+	<script src="<?php echo $rootsite; ?>assets/js/jquery.bootstrap.wizard.min.js"></script>
+	<script src="<?php echo $rootsite; ?>assets/js/jquery.validate.min.js"></script>
+	<script src="<?php echo $rootsite; ?>assets/js/jquery.inputmask.bundle.min.js"></script>
 	<script src="<?php echo $rootsite; ?>assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
 	<script src="<?php echo $rootsite; ?>assets/js/bootstrap-datepicker.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/jquery.inputmask.bundle.min.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/bootstrap-timepicker.min.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/bootstrap-colorpicker.min.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/daterangepicker/moment.min.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/daterangepicker/daterangepicker.js"></script>
+	<script src="<?php echo $rootsite; ?>assets/js/bootstrap-switch.min.js"></script>
 	<script src="<?php echo $rootsite; ?>assets/js/jquery.multi-select.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/icheck/icheck.min.js"></script>
 	<script src="<?php echo $rootsite; ?>assets/js/neon-chat.js"></script>
 	<script src="<?php echo $rootsite; ?>assets/js/neon-custom.js"></script>
 	<script src="<?php echo $rootsite; ?>assets/js/neon-demo.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/jquery.validate.min.js"></script>
-	<script src="<?php echo $rootsite; ?>assets/js/jquery.bootstrap.wizard.min.js"></script>
-	<link rel="stylesheet" href="<?php echo $rootsite; ?>assets/js/select2/select2-bootstrap.css">
-	<link rel="stylesheet" href="<?php echo $rootsite; ?>assets/js/select2/select2.css">
-	<link rel="stylesheet" href="<?php echo $rootsite; ?>assets/js/selectboxit/jquery.selectBoxIt.css">
-	<link rel="stylesheet" href="<?php echo $rootsite; ?>assets/js/daterangepicker/daterangepicker-bs3.css">
-	<link rel="stylesheet" href="<?php echo $rootsite; ?>assets/js/icheck/skins/minimal/_all.css">
-	<link rel="stylesheet" href="<?php echo $rootsite; ?>assets/js/icheck/skins/square/_all.css">
-	<link rel="stylesheet" href="<?php echo $rootsite; ?>assets/js/icheck/skins/flat/_all.css">
-	<link rel="stylesheet" href="<?php echo $rootsite; ?>assets/js/icheck/skins/futurico/futurico.css">
-	<link rel="stylesheet" href="<?php echo $rootsite; ?>assets/js/icheck/skins/polaris/polaris.css">
 
 </body>
 </html>

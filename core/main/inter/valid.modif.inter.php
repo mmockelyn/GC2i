@@ -29,10 +29,10 @@ function delayer(){
 		<h2>Ajout d'une Tache</h2>
 		<div class="row">
 	
-			<h3>L'ajout de la tache pour l'intervention N° <?php echo $idintervention; ?> à été inseré avec succès.</h3>
-			<a href="<?php echo $rootsite; ?>/core/main/inter/">
+			<h3><i class="entypo-check"></i>L'ajout de la tache pour l'intervention N° <?php echo $idintervention; ?> à été inseré avec succès.</h3>
+			<a href="<?php echo $rootsite; ?>/core/main/inter/fiche.inter.php?idintervention=<?php echo $idintervention; ?>">
 			<button class="btn btn-blue btn-icon" type="button">
-				Retour à la page d'accueil Intervention
+				Retour à la fiche d'Intervention
 				<i class="entypo-home"></i>
 			</button>
 			</a>

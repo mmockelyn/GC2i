@@ -12,18 +12,10 @@ $heure = date('H:i');
 
 <hr />
 			<ol class="breadcrumb bc-3">
-						<li>
-				<a href="index.html"><i class="entypo-home"></i>Accueil</a>
-			</li>
-					<li>
-			
-							<a href="forms-main.html">Intervention</a>
-					</li>
-				<li class="active">
-			
-							<strong>Inserer une tache</strong>
-					</li>
-					</ol>
+				<li><a href="<?php echo $rootsite; ?>"><i class="entypo-home"></i>Accueil</a></li>
+				<li><a href="<?php echo $rootsite; ?>/core/main/inter/">Intervention</a></li>
+				<li class="active"><strong>Inserer une tache</strong></li>
+			</ol>
 <br />
 
 
@@ -40,7 +32,7 @@ $donnee_inter = mysql_fetch_array($sql_inter);
 <h4>Insertion d'une tache</h4>
 <hr />
 
-				<form role="form" class="form-horizontal form-groups-bordered" method="post" action="valid.inserttask.inter.php">
+				<form role="form" class="form-horizontal form-groups-bordered" method="post" action="valid.modif.inter.php">
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">ID Intervention</label>

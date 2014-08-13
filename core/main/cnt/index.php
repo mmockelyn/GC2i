@@ -10,23 +10,18 @@ $date = date('d/m/Y');
 <?php include ('../../../inc/headerbar.php'); ?>
 
 <hr />
-			<ol class="breadcrumb bc-3">
-						<li>
-				<a href="index.html"><i class="entypo-home"></i>Accueil</a>
-			</li>
-				<li class="active">
-			
-							<strong>Client</strong>
-					</li>
-					</ol>
+	<ol class="breadcrumb bc-3">
+		<li><a href="index.html"><i class="entypo-home"></i>Accueil</a></li>
+		<li class="active"><strong>Intervention</strong></li>
+	</ol>
 			
 
 
 
-<h3>Liste des Clients</h3>
-				<a href="#">
+<h3>Liste des Interventions</h3>
+				<a href="nouv.inter.php">
 					<button class="btn btn-green btn-icon icon-left" type="button">
-						Nouveau Client
+						Nouvelle Intervention
 						<i class="entypo-plus"></i>
 					</button>
 				</a>
@@ -36,56 +31,81 @@ $date = date('d/m/Y');
 	<thead>
 		<tr>
 			<th>ID</th>
-			<th>Identité</th>
-			<th>Adresse</th>
-			<th>Contact</th>
-			<th>Info (si société)</th>
+			<th>Identité Client</th>
+			<th>Date</th>
+			<th>Materiel</th>
+			<th>Etat</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
-	
 	<tbody>
-		<tr>
 		<?php
-			$query_client = mysql_query("SELECT * FROM client");
-			while($donnee_client = mysql_fetch_array($query_client))
+			$query_intervention = mysql_query("SELECT * FROM intervention, client WHERE intervention.idclient = client.idclient");
+			while($donnee_intervention = mysql_fetch_array($query_intervention))
 				{
 		?>
-			<td><?php echo $donnee_client['idclient']; ?></td>
-			<td><?php echo $donnee_client['civilite']; ?> <?php echo $donnee_client['nom']; ?> <?php echo $donnee_client['prenom']; ?></td>
+		<?php 
+				if($donnee_intervention['etat_intervention'] == 1){echo "<div class=blocred>";}
+				if($donnee_intervention['etat_intervention'] == 2){echo "<div class=blocyellow>";}
+				if($donnee_intervention['etat_intervention'] == 3){echo "<div class=blocgreen>";}
+				if($donnee_intervention['etat_intervention'] == 4){echo "<div class=blocgreen>";}
+
+			?>
+		<tr>
+			<td><?php echo $donnee_intervention['idintervention']; ?></td>
 			<td>
-				<?php echo $donnee_client['adresse1']; ?><br>
-				<?php echo $donnee_client['adresse2']; ?><br>
-				<?php echo $donnee_client['cp']; ?> <?php echo $donnee_client['ville']; ?>
+				<strong><?php echo $donnee_intervention['civilite']; ?> <?php echo $donnee_intervention['nom']; ?> <?php echo $donnee_intervention['prenom']; ?></strong><br>
+				<?php echo $donnee_intervention['adresse1']; ?><br>
+				<?php echo $donnee_intervention['cp']; ?> <?php echo $donnee_intervention['ville']; ?><br>
+				Tel: <?php echo $donnee_intervention['tel']; ?><br>
+				Port: <?php echo $donnee_intervention['port']; ?>
+			</td>
+			<td><?php echo $donnee_intervention['date_entre']; ?> à <?php echo $donnee_intervention['heure_entre']; ?></td>
+			<td>
+				Catégorie: <?php echo $donnee_intervention['categorie_materiel']; ?><br>
+				Marque: <?php echo $donnee_intervention['marque_materiel']; ?><br>
+				Serie: <?php echo $donnee_intervention['modele_materiel']; ?>
+			</td>
+			<?php 
+				if($donnee_intervention['etat_intervention'] == 1){echo "<td class=blocred>";}
+				if($donnee_intervention['etat_intervention'] == 2){echo "<td class=blocyellow>";}
+				if($donnee_intervention['etat_intervention'] == 3){echo "<td class=blocgreen>";}
+				if($donnee_intervention['etat_intervention'] == 4){echo "<td class=blocgreen>";}
+			?>
+
+				<?php
+					switch ($donnee_intervention['etat_intervention']) {
+						case '1':
+							echo "<div class=blocred>Non Vu</div>";
+							break;
+
+						case '2':
+							echo "<div class=blocyellow>En Cours</div>";
+							break;
+
+						case '3':
+							echo "<div class=blocyellow>Terminé - Résolue</div>";
+							break;
+
+						case '4':
+							echo "<div class=blocgreen>Terminé - Non résolue</div>";
+							break;
+						
+						default:
+							echo "<div class=>no information</div>";	
+							break;
+					}
+				?>
 			</td>
 			<td>
-				Tel: <?php echo $donnee_client['tel']; ?><br>
-				Port: <?php echo $donnee_client['port']; ?><br>
-				Mail: <?php echo $donnee_client['mail']; ?>
-			</td>
-			<td>
-				Raison Social: <?php echo $donnee_client['raison_social']; ?><br>
-				Siret: <?php echo $donnee_client['siret']; ?><br>
-				TVA Intracommunautaire: <?php echo $donnee_client['tva_intra']; ?>
-			</td>
-			<td>
-				<a href="#" class="btn btn-default btn-sm btn-icon icon-left">
-					<i class="entypo-pencil"></i>
-					Editer
-				</a>
-				
-				<a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-					<i class="entypo-cancel"></i>
-					Supprimé
-				</a>
-				
-				<a href="#" class="btn btn-info btn-sm btn-icon icon-left">
+				<a href="<?php echo $rootsite; ?>/core/main/inter/fiche.inter.php?idintervention=<?php echo $donnee_intervention['idintervention']; ?>" class="btn btn-info btn-sm btn-icon icon-left">
 					<i class="entypo-info"></i>
-					Fiche Client
+					Fiche Intervention
 				</a>
 			</td>
-			<?php } ?>
 		</tr>
+		<?php } ?>
+		</div>
 		
 		
 	</tbody>
@@ -158,7 +178,7 @@ var tableContainer;
 		
 		tableContainer.dataTable({
 			"sPaginationType": "bootstrap",
-			"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+			"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 			"bStateSave": true,
 			
 

@@ -1,6 +1,6 @@
 <?php
 //import donnée post
-$idintervention = $_POST['idintervention'];
+$idinterventionmobile = $_POST['idinterventionmobile'];
 $etat_intervention = $_POST['etat_intervention'];
 
 
@@ -9,7 +9,8 @@ $etat_intervention = $_POST['etat_intervention'];
 
 include ('../../../inc/config.php');
 $error_sql = mysql_error();
-mysql_query("UPDATE intervention SET etat_intervention = '$etat_intervention' WHERE idintervention = $idintervention");
+
+mysql_query("UPDATE mobile SET etat_intervention = '$etat_intervention' WHERE idinterventionmobile = $idinterventionmobile");
 echo $error_sql; 
 include ('../../../inc/header.php');
 include ('../../../inc/sidebar.php');
@@ -19,15 +20,15 @@ $date = date('d/m/Y');
 	</div>	
 	<div class="main-content">
 	<?php include ('../../../inc/headerbar.php'); ?>
-		<h2>Cloture de l'intervention</h2>
+		<h2>Cloture d'une intervention mobile</h2>
 		<?php
 			if($req == true)
 				{
 		?>
 				<div class="row">
 	
-					<h3><i class="entypo-check"></i>La cloture de l'intervention n° <?php echo $idintervention; ?> à été exécuter avec succès</h3>
-					<a href="<?php echo $rootsite; ?>/core/main/inter/fiche.inter.php?idintervention=<?php echo $idintervention; ?>">
+					<h3><i class="entypo-check"></i>La cloture de l'intervention mobile n° <?php echo $idinterventionmobile; ?> à été exécuter avec succès</h3>
+					<a href="<?php echo $rootsite; ?>/core/main/mobile/fiche.inter.php?idinterventionmobile=<?php echo $idinterventionmobile; ?>">
 					<button class="btn btn-blue btn-icon" type="button">
 						Retour sur la fiche d'intervention
 						<i class="entypo-document"></i>
@@ -39,11 +40,13 @@ $date = date('d/m/Y');
 		?>
 					<div class="row">
 	
-						<h3><i class="entypo-cancel"></i>L'ajout de l'intervention pour la date du <?php echo $date_entre; ?> à Echouer</h3>
-						<a href="<?php echo $rootsite; ?>/core/main/inter/fiche.inter.php?idintervention=<?php echo $idintervention; ?>">
+						<h3><i class="entypo-cancel"></i>La cloture de l'intervention mobile n° <?php echo $idinterventionmobile; ?> à rencontrer une erreur.<br>
+						Contacter votre administrateur réseau.
+						</h3>
+						<a href="<?php echo $rootsite; ?>/core/main/mobile/fiche.inter.php?idinterventionmobile=<?php echo $idinterventionmobile; ?>">
 						<button class="btn btn-blue btn-icon" type="button">
-							Retour à la fiche d'Intervention
-							<i class="entypo-home"></i>
+							Retour sur la fiche d'intervention
+							<i class="entypo-document"></i>
 						</button>
 						</a>
 					</div>
